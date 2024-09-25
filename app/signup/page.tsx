@@ -1,9 +1,18 @@
 "use client"; 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+interface FormData {
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  dob: string;
+  gender: string;
+}
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
     password: '',
@@ -12,7 +21,7 @@ const RegistrationForm = () => {
     gender: ''
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({}); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -67,10 +76,17 @@ const RegistrationForm = () => {
     }
   };
 
+  // This useEffect ensures the component only renders on the client side
+  useEffect(() => {
+    // This effect can be used to do anything that should only happen on the client
+  }, []);
+
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100"> 
       <form onSubmit={handleSubmit} className="max-w-lg w-full p-4 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-bold text-black mb-4 text-center">Register</h2> 
+        
+        {/* Full Name */}
         <div className="mb-4">
           <label className="block text-sm font-bold text-black mb-2">Full Name</label>
           <input
@@ -78,11 +94,12 @@ const RegistrationForm = () => {
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
-            className={`w-full p-2 border ${errors.fullName ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`} 
+            className={`w-full p-2 border ${errors.fullName ? 'border-red-500' : 'border-gray-300'} rounded-lg`}
           />
           {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
         </div>
 
+        {/* Email */}
         <div className="mb-4">
           <label className="block text-sm font-bold text-black mb-2">Email</label>
           <input
@@ -90,11 +107,12 @@ const RegistrationForm = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full p-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`} 
+            className={`w-full p-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg`}
           />
           {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
         </div>
 
+        {/* Password */}
         <div className="mb-4">
           <label className="block text-sm font-bold text-black mb-2">Password</label>
           <input
@@ -102,11 +120,12 @@ const RegistrationForm = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className={`w-full p-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`} 
+            className={`w-full p-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`}
           />
           {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
         </div>
 
+        {/* Confirm Password */}
         <div className="mb-4">
           <label className="block text-sm font-bold text-black mb-2">Confirm Password</label>
           <input
@@ -114,37 +133,39 @@ const RegistrationForm = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className={`w-full p-2 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`} 
+            className={`w-full p-2 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`}
           />
           {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
         </div>
 
+        {/* Date of Birth */}
         <div className="mb-4">
-          <label className="block text-sm font-bold text-black mb-2">Date of Birth</label>
-          <input
-            type="date"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-            className={`w-full p-2 border ${errors.dob ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`} 
-          />
-          {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
+            <label className="block text-sm font-bold text-black mb-2">Date of Birth</label>
+            <input
+                type="date"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+                className={`w-full p-2 border ${errors.dob ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`}
+            />
+            {errors.dob && <p className="text-red-500 text-sm">{errors.dob}</p>}
         </div>
 
+        {/* Gender */}
         <div className="mb-4">
-          <label className="block text-sm font-bold text-black mb-2">Gender</label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            className={`w-full p-2 border ${errors.gender ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`} 
-          >
-            <option value="" className="text-black">Select Gender</option> 
-            <option value="male" className="text-black">Male</option>
-            <option value="female" className="text-black">Female</option>
-            <option value="other" className="text-black">Other</option>
-          </select>
-          {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
+            <label className="block text-sm font-bold text-black mb-2">Gender</label>
+            <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className={`w-full p-2 border ${errors.gender ? 'border-red-500' : 'border-gray-300'} rounded-lg text-black`} 
+            >
+                <option value="">Select Gender</option> 
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
         </div>
 
         <button
