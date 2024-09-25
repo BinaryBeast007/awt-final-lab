@@ -17,7 +17,7 @@ const Navbar = () => {
           <a href="/" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
             Home
           </a>
-          <a href="/form" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
+          <a href="/signup" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
             Form
           </a>
         </div>
