@@ -9,14 +9,7 @@ interface Admin {
   a_address: string;
   a_gender: string;
   a_dob: string;
-  a_phone_number: string; // Ensure this matches the backend DTO
-  user: {
-    u_name: string; // User info that won't be updated
-    u_email: string; // User info that won't be updated
-    u_password: string; // User info that won't be updated
-    u_role: string; // User info that won't be updated
-    status: string; // User info that won't be updated
-  };
+  a_phone_number: string;
 }
 
 const UpdateAdminInfo = () => {
@@ -74,14 +67,9 @@ const UpdateAdminInfo = () => {
           a_address: admin.a_address,
           a_gender: admin.a_gender,
           a_dob: admin.a_dob,
-          a_phone_number: admin.a_phone_number // Make sure this is correct
-          // Include the user info as is
-        //   u_name: admin.user.u_name,
-        //   u_email: admin.user.u_email,
-        //   u_password: admin.user.u_password,
-        //   u_role: admin.user.u_role,
-        //   status: admin.user.status,
+          a_phone_number: admin.a_phone_number
         };
+        console.log(updatedAdminData);
 
         await axios.put(`http://localhost:3000/admin/update/${adminId}`, updatedAdminData);
         alert("Admin information updated successfully!");
@@ -95,7 +83,7 @@ const UpdateAdminInfo = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6 text-black">Update Admin Information</h1> {/* Changed to black */}
+      <h1 className="text-3xl font-bold mb-6 text-black">Update Admin Information</h1> 
 
       <form onSubmit={handleFetch} className="mb-4">
         <input
@@ -113,7 +101,7 @@ const UpdateAdminInfo = () => {
 
       {loading && <p>Loading...</p>}
 
-      {error && <p className="text-black">{error}</p>} {/* Changed to black */}
+      {error && <p className="text-black">{error}</p>} 
 
       {admin && (
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -168,26 +156,26 @@ const UpdateAdminInfo = () => {
             <input
               type="date"
               name="a_dob"
-              value={admin.a_dob.split("T")[0]} // Format the date for the input
+              value={admin.a_dob.split("T")[0]} 
               onChange={handleChange}
               className="border p-2 rounded-md w-full text-black"
               required
             />
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="a_phone_number">
               Phone Number
             </label>
             <input
-              type="tel"
+              type="text"
               name="a_phone_number"
-              value={admin.a_phone_number} // Ensure phone number is set
+              value={admin.a_phone_number} 
               onChange={handleChange}
               className="border p-2 rounded-md w-full text-black"
               placeholder="Enter Phone Number"
               required
             />
-          </div>
+          </div> */}
           <button type="submit" className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
             Update Admin
           </button>
