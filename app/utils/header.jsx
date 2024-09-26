@@ -9,10 +9,34 @@ const HeroSection = () => {
           Healthcare Made Easy, With Telemedicine.
         </p>
         <a
-          href="#"
+          href="/register"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full"
         >
-          Get Started
+          Registration
+        </a>
+        <a
+          href="/alladmins"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full"
+        >
+          Get All Admins
+        </a>
+        <a
+          href="/getuser"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full"
+        >
+          Get Admin by ID
+        </a>
+        <a
+          href="/updateadmin"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full"
+        >
+          Update Admin
+        </a>
+        <a
+          href="/getquery"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full"
+        >
+          Get Admin by ID & Name
         </a>
       </div>
     </section>
